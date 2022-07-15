@@ -6,12 +6,11 @@ using UnityEngine;
 
 public class SC_HumanController : MonoBehaviour
 {
-    public float walkingSpeed = 7.5f;
-    public float runningSpeed = 11.5f;
+    public float walkingSpeed = 90.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     public Camera playerCamera;
-    public float lookSpeed = 2.0f;
+    public float lookSpeed = 1.0f;
     public float lookXLimit = 45.0f;
 
     CharacterController characterController;
@@ -32,27 +31,17 @@ public class SC_HumanController : MonoBehaviour
         // We are grounded, so recalculate move direction based on axes
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
-        // Press Left Shift to run
-        bool isRunning = false; //Input.GetKey(KeyCode.LeftShift); //|| SC_MobileControls.instance.GetMobileButton("Sprinting");
-        float curSpeedX = canMove ? (isRunning ? runningSpeed : walkingSpeed) * (Input.GetAxis("Vertical") + SC_MobileControls.instance.GetJoystick("JoystickLeft").y) : 0;
-        float curSpeedY = canMove ? (isRunning ? runningSpeed : walkingSpeed) * (Input.GetAxis("Horizontal") + SC_MobileControls.instance.GetJoystick("JoystickLeft").x) : 0;
+
+        float curSpeedX = canMove ? (walkingSpeed) * (Input.GetAxis("Vertical") + SC_MobileControls.instance.GetJoystick("JoystickLeft").y) : 0;
+        float curSpeedY = canMove ? (walkingSpeed) * (Input.GetAxis("Horizontal") + SC_MobileControls.instance.GetJoystick("JoystickLeft").x) : 0;
         
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-/*
-        if ((Input.GetButton("Jump") || SC_MobileControls.instance.GetMobileButtonDown("Jumping")) && canMove && characterController.isGrounded)
-        {
-            moveDirection.y = jumpSpeed;
-        }
-        else
-        {
-            moveDirection.y = movementDirectionY;
-        }
-*/
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
         // as an acceleration (ms^-2)
+        
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
@@ -69,13 +58,16 @@ public class SC_HumanController : MonoBehaviour
             #else
             rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
             #endif
+
             rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+            
             #if UNITY_IPHONE || UNITY_ANDROID || UNITY_EDITOR
             transform.rotation *= Quaternion.Euler(0, SC_MobileControls.instance.GetJoystick("JoystickRight").x * lookSpeed, 0);
             #else
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
             #endif
+            
         }
     }
 }
