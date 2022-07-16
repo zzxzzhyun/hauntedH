@@ -32,8 +32,8 @@ public class SC_HumanController : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        float curSpeedX = canMove ? (walkingSpeed) * (Input.GetAxis("Vertical") + SC_MobileControls.instance.GetJoystick("JoystickLeft").y) : 0;
-        float curSpeedY = canMove ? (walkingSpeed) * (Input.GetAxis("Horizontal") + SC_MobileControls.instance.GetJoystick("JoystickLeft").x) : 0;
+        float curSpeedX = (walkingSpeed) * (SC_MobileControls.instance.GetJoystick("JoystickLeft").y);
+        float curSpeedY = (walkingSpeed) * (SC_MobileControls.instance.GetJoystick("JoystickLeft").x);
         
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
@@ -51,23 +51,20 @@ public class SC_HumanController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
 
         // Player and Camera rotation
-        if (canMove)
-        {
-            #if UNITY_IPHONE || UNITY_ANDROID || UNITY_EDITOR
-            rotationX += -(SC_MobileControls.instance.GetJoystick("JoystickRight").y) * lookSpeed;
-            #else
-            rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-            #endif
+        #if UNITY_IPHONE || UNITY_ANDROID || UNITY_EDITOR
+        rotationX += -(SC_MobileControls.instance.GetJoystick("JoystickRight").y) * lookSpeed;
+        #else
+        rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
+        #endif
 
-            rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-            playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-            
-            #if UNITY_IPHONE || UNITY_ANDROID || UNITY_EDITOR
-            transform.rotation *= Quaternion.Euler(0, SC_MobileControls.instance.GetJoystick("JoystickRight").x * lookSpeed, 0);
-            #else
-            transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-            #endif
-            
-        }
+        rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
+        playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
+        
+        #if UNITY_IPHONE || UNITY_ANDROID || UNITY_EDITOR
+        transform.rotation *= Quaternion.Euler(0, SC_MobileControls.instance.GetJoystick("JoystickRight").x * lookSpeed, 0);
+        #else
+        transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+        #endif
+        
     }
 }
