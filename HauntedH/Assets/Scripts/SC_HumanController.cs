@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(CharacterController))]
 
 public class SC_HumanController : MonoBehaviour
 {
     public float walkingSpeed = 90.0f;
-    public float jumpSpeed = 8.0f;
-    public float gravity = 20.0f;
     public Camera playerCamera;
-    public float lookSpeed = 1.0f;
+    public float lookSpeed = 0.7f;
     public float lookXLimit = 45.0f;
 
     CharacterController characterController;
+    Animator animator;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
@@ -23,7 +23,7 @@ public class SC_HumanController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -35,17 +35,9 @@ public class SC_HumanController : MonoBehaviour
         float curSpeedX = (walkingSpeed) * (SC_MobileControls.instance.GetJoystick("JoystickLeft").y);
         float curSpeedY = (walkingSpeed) * (SC_MobileControls.instance.GetJoystick("JoystickLeft").x);
         
-        float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
 
-        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-        // as an acceleration (ms^-2)
-        
-        if (!characterController.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+        moveDirection.y = 0;
 
         // Move the controller
         characterController.Move(moveDirection * Time.deltaTime);
@@ -66,5 +58,13 @@ public class SC_HumanController : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         #endif
         
+        // Set animation
+        animator.SetFloat("speed", moveDirection.magnitude);
+        animator.SetFloat("stamina", 100);
+
+
     }
+
+
+
 }

@@ -24,10 +24,11 @@ public class MoveObjectController : MonoBehaviour
 		//Initialize moveDrawController if script is enabled.
 		player = GameObject.FindGameObjectWithTag("Player");
 
-		fpsCam = Camera.main;
+		fpsCam = player.GetComponent<Camera>();
 		if (fpsCam == null)	//a reference to Camera is required for rayasts
 		{
 			Debug.LogError("A camera tagged 'MainCamera' is missing.");
+			Debug.LogError(player.name);
 		}
 
 		//create AnimatorOverrideController to re-use animationController for sliding draws.
