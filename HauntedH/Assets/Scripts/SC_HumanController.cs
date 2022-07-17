@@ -11,7 +11,9 @@ public class SC_HumanController : MonoBehaviour
     public Camera playerCamera;
     public float lookSpeed = 0.7f;
     public float lookXLimit = 45.0f;
+    public int heartRate = 80;
 
+    InventoryManager invenManager;
     CharacterController characterController;
     Animator animator;
     Vector3 moveDirection = Vector3.zero;
@@ -20,10 +22,14 @@ public class SC_HumanController : MonoBehaviour
     [HideInInspector]
     public bool canMove = true;
 
+
+
     void Start()
     {
+        playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        invenManager = GetComponentInChildren<InventoryManager>();
     }
 
     void Update()
@@ -61,10 +67,9 @@ public class SC_HumanController : MonoBehaviour
         // Set animation
         animator.SetFloat("speed", moveDirection.magnitude);
         animator.SetFloat("stamina", 100);
-
+        invenManager.ListItems();
 
     }
-
 
 
 }
