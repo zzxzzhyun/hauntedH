@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Ghost Camera
   value: 1
   icon: {fileID: 21300000, guid: eed328c8535064525be4916ad52b8738, type: 3}
+  itemType: 1

@@ -8,11 +8,15 @@ using TMPro;
 
 public class SC_HumanController : MonoBehaviour
 {
+    public static SC_HumanController Instance;
+
     public float walkingSpeed = 90.0f;
     public Camera playerCamera;
     public float lookSpeed = 0.03f;
     public float lookXLimit = 20.0f;
     public int heartRate = 80;
+    public int numCorn = 0;
+    public int stamina = 100;
 
     public TextMeshProUGUI bpmtext;
 
@@ -24,8 +28,12 @@ public class SC_HumanController : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
+    public bool seeGhost = false;
 
-
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -69,18 +77,52 @@ public class SC_HumanController : MonoBehaviour
         
         // Set animation
         animator.SetFloat("speed", moveDirection.magnitude);
-        //animator.SetFloat("stamina", 100);
-        invenManager.ListItems();
-        IncreaseBPM();
+        animator.SetFloat("stamina", stamina);
 
     }
 
 
-    void IncreaseBPM()
+    public void IncreaseBPM()
     {
         // calculate distance between human and phantom
         //heartRate += value;
         bpmtext.text = $"BPM: {heartRate}";
     }
 
+    public void DetectPhantom()
+    {
+        seeGhost = !seeGhost;
+
+        if (seeGhost)
+        {
+            playerCamera.cullingMask = 1 << LayerMask.NameToLayer("Phantom");
+            playerCamera.cullingMask |= 1 << LayerMask.NameToLayer("Ground");
+            playerCamera.cullingMask |= 1 << LayerMask.NameToLayer("Ground");
+
+        } else {
+            playerCamera.cullingMask = -1;
+            playerCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("Phantom"));
+            playerCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("PhantomItem"));
+
+        }
+
+    }
+
+    public void ShowFlashlight()
+    {
+
+    }
+
+    public void MakeKey()
+    {
+        numCorn += 1;
+        if (numCorn == 4)
+        {
+             
+        }
+
+
+
+    }
+ 
 }

@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Body
   value: 0
   icon: {fileID: 21300000, guid: 4abb21db44b8f43a381c85662188e185, type: 3}
+  itemType: 4

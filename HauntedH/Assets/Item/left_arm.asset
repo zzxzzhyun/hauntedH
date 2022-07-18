@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Left Arm
   value: 0
   icon: {fileID: 21300000, guid: 3a933d6998088400881fc0c0d472d1f4, type: 3}
+  itemType: 4

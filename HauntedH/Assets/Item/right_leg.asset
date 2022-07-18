@@ -16,3 +16,4 @@ MonoBehaviour:
   itemName: Right Leg
   value: 0
   icon: {fileID: 21300000, guid: 3f2fbab9fa5c2460ab5be1929a5cc5c4, type: 3}
+  itemType: 4

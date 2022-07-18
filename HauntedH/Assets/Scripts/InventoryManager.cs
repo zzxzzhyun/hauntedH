@@ -13,6 +13,8 @@ public class InventoryManager : MonoBehaviour
     public Transform ItemContent;
     public GameObject InventoryItem;
 
+    public InventoryItemController InventoryItems;
+
     private void Awake()
     {
         Instance = this;
@@ -23,13 +25,17 @@ public class InventoryManager : MonoBehaviour
         Items.Add(item);
     }
 
+    public void Remove(Item item)
+    {
+        Items.Remove(item);
+    }
+
     public void ListItems()
     {
         foreach (Transform item in ItemContent)
         {
             Destroy(item.gameObject);
         }
-
 
         foreach (var item in Items)
         {
@@ -38,10 +44,23 @@ public class InventoryManager : MonoBehaviour
             var itemName = obj.transform.Find("ItemName").GetComponent<TMPro.TextMeshProUGUI>();
             var itemIcon = obj.transform.Find("ItemIcon").GetComponent<Image>();
             
-            //Debug.Log(itemName.text);
             itemName.text = item.itemName;
             itemIcon.sprite = item.icon;
         }
+
+        SetInventoryItems();
+
+    }
+
+    public void SetInventoryItems()
+    {
+        InventoryItems = ItemContent.GetComponentInChildren<InventoryItemController>();
+
+        for (int i=0; i<Items.Count; i++)
+        {
+            InventoryItems.AddItem(Items[i]);
+        }
+
     }
 
 }
