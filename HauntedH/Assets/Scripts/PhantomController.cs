@@ -6,19 +6,15 @@ using TMPro;
 
 [RequireComponent(typeof(CharacterController))]
 
-public class SC_HumanController : MonoBehaviour
+public class PhantomController : MonoBehaviour
 {
     public float walkingSpeed = 90.0f;
     public Camera playerCamera;
     public float lookSpeed = 0.03f;
     public float lookXLimit = 20.0f;
-    public int heartRate = 80;
-
-    public TextMeshProUGUI bpmtext;
 
     InventoryManager invenManager;
     CharacterController characterController;
-    Animator animator;
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
@@ -31,7 +27,6 @@ public class SC_HumanController : MonoBehaviour
     {
         playerCamera = GetComponentInChildren<Camera>();
         characterController = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
         invenManager = GetComponentInChildren<InventoryManager>();
     }
 
@@ -67,20 +62,11 @@ public class SC_HumanController : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         #endif
         
-        // Set animation
-        animator.SetFloat("speed", moveDirection.magnitude);
-        //animator.SetFloat("stamina", 100);
         invenManager.ListItems();
-        IncreaseBPM();
 
     }
 
 
-    void IncreaseBPM()
-    {
-        // calculate distance between human and phantom
-        //heartRate += value;
-        bpmtext.text = $"BPM: {heartRate}";
-    }
+
 
 }

@@ -15,8 +15,8 @@ TagManager:
   - InteractRaycast
   - Ground
   - Phantom
-  - 
-  - 
+  - PhantomItem
+  - HumanItem
   - 
   - 
   - 
