@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 [RequireComponent(typeof(CharacterController))]
 
@@ -12,6 +13,8 @@ public class SC_HumanController : MonoBehaviour
     public float lookSpeed = 0.7f;
     public float lookXLimit = 45.0f;
     public int heartRate = 80;
+
+    public TextMeshProUGUI bpmtext;
 
     InventoryManager invenManager;
     CharacterController characterController;
@@ -26,7 +29,7 @@ public class SC_HumanController : MonoBehaviour
 
     void Start()
     {
-        playerCamera = GetComponentInChildren<Camera>();
+        playerCamera = Camera.main;
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         invenManager = GetComponentInChildren<InventoryManager>();
@@ -66,10 +69,18 @@ public class SC_HumanController : MonoBehaviour
         
         // Set animation
         animator.SetFloat("speed", moveDirection.magnitude);
-        animator.SetFloat("stamina", 100);
+        //animator.SetFloat("stamina", 100);
         invenManager.ListItems();
+        IncreaseBPM();
 
     }
 
+
+    void IncreaseBPM()
+    {
+        // calculate distance between human and phantom
+        //heartRate += value;
+        bpmtext.text = $"BPM: {heartRate}";
+    }
 
 }

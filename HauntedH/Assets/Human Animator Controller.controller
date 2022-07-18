@@ -37,7 +37,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: bpm
+    m_ConditionEvent: stamina
     m_EventTreshold: 0.1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3942510321018851330}
@@ -167,7 +167,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: bpm
+  - m_Name: stamina
     m_Type: 1
     m_DefaultFloat: 80
     m_DefaultInt: 0

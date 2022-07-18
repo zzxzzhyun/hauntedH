@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350c47ea5931840609de7da74a445c6c, type: 3}
-  m_Name: ghostcam
+  m_Name: corn
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: Ghost Camera
-  value: 1
-  icon: {fileID: 21300000, guid: eed328c8535064525be4916ad52b8738, type: 3}
+  id: 3
+  itemName: corn
+  value: 0
+  icon: {fileID: 21300000, guid: 4a00eb3d269bf44f8bea5c4122004b78, type: 3}
