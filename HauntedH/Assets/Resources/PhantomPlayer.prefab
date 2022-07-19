@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 8842938545126032165}
   - component: {fileID: 433317471632650234}
   - component: {fileID: 8669961822928531077}
+  - component: {fileID: 2224296216416559830}
   m_Layer: 8
   m_Name: PhantomPlayer
   m_TagString: Untagged
@@ -146,15 +147,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2681575345356286438}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f952513a148a08f4f84b130cbf655706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 90
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 2681575345064262254}
   lookSpeed: 0.03
   lookXLimit: 20
+  RB: {fileID: 2224296216416559830}
+  SR: {fileID: 0}
+  PV: {fileID: 433317471632650234}
+  NicknameText: {fileID: 0}
   canMove: 1
   canHit: 0
 --- !u!114 &433317471632650234
@@ -196,6 +201,22 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!54 &2224296216416559830
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2681575345356286438}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &2681575345593986481
 PrefabInstance:
   m_ObjectHideFlags: 0

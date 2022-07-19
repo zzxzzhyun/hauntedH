@@ -90,7 +90,7 @@ public class SC_HumanController : MonoBehaviour
             // Set animation
             animator.SetFloat("speed", moveDirection.magnitude);
             animator.SetFloat("stamina", stamina);
-            /*if(moveDirection.magnitude > 50)
+            if(moveDirection.magnitude > 50)
             {
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isRunning", true);
@@ -104,7 +104,7 @@ public class SC_HumanController : MonoBehaviour
             {
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isRunning", false);
-            }*/
+            }
         }
     }
 
@@ -160,13 +160,15 @@ public class SC_HumanController : MonoBehaviour
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
+            stream.SendNext(transform.localPosition);
+            stream.SendNext(transform.localRotation);
+            stream.SendNext(playerCamera.transform.rotation);
         }
         else
         {
             moveDirection = (Vector3)stream.ReceiveNext();
-
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+            playerCamera.transform.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 

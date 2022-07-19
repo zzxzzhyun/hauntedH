@@ -8,7 +8,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public InputField NickNameInput;
     public GameObject DisconnectPanel;
-    public GameObject RespawnPanel;
     public GameObject Canvas;
     public Button connect;
     public Button Phantom;
@@ -63,17 +62,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public void SpawnHuman()
     {
-        GameObject human = PhotonNetwork.Instantiate("HumanPlayer",new Vector3(-95,2,-180),Quaternion.identity);
-        human.GetComponent<SC_HumanController>().enabled = true;
+        GameObject human = PhotonNetwork.Instantiate("HumanPlayer",new Vector3(-95,10,-180),Quaternion.identity);
+        human.GetComponent<PhantomController>().enabled = true;
     }
     public void SpawnPhantom()
     {
-        GameObject human = PhotonNetwork.Instantiate("PhantomPlayer", new Vector3(-95, 2, -180), Quaternion.identity);
-        human.GetComponent<PhantomController>().enabled = true;
+        GameObject phantom = PhotonNetwork.Instantiate("PhantomPlayer", new Vector3(-100, 50, -180), Quaternion.identity);
+        phantom.GetComponent<SC_HumanController>().enabled = true;
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
         DisconnectPanel.SetActive(true);
-        RespawnPanel.SetActive(false);
     }
 }

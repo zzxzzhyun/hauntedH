@@ -197,7 +197,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5382174906702449051}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96480d6f05ae04ebba19cd173b485089, type: 3}
   m_Name: 
@@ -270,6 +270,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 2291224863554536301}
   - {fileID: 3144849240686106565}
+  - {fileID: 2617496431572019234}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

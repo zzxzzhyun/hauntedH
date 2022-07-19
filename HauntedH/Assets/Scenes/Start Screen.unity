@@ -314,8 +314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6539cfec3e0b08e429d5aed497dbfe7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phantom: {fileID: 0}
-  human: {fileID: 0}
   alerttext: {fileID: 924380448}
   start: {fileID: 290567089}
 --- !u!1 &352456881
