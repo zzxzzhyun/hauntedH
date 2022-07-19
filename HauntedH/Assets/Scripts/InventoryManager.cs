@@ -9,7 +9,7 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
-    public List<InventoryItemController> InventoryItems;
+    public InventoryItemController[] InventoryItems;
 
     public Transform ItemContent;
     public GameObject InventoryItem;
@@ -49,21 +49,18 @@ public class InventoryManager : MonoBehaviour
         }
 
         SetInventoryItems();
-
     }
 
     public void SetInventoryItems()
     {
-        /*
-        Debug.Log("before");
-        InventoryItems = GetComponentInChildren<List<InventoryItemController>>();
-        Debug.Log(Items.Count);
+        
+        InventoryItems = ItemContent.GetComponentsInChildren<InventoryItemController>();
+        
         for (int i=0; i<Items.Count; i++)
         {
-            InventoryItems[i].AddItem(Items[i]);
-            Debug.Log("here");
-        }*/
-
+            InventoryItems[2*Items.Count-2].AddItem(Items[Items.Count-1]);
+        }
+        Debug.Log(Items.Count);
 
     }
 
