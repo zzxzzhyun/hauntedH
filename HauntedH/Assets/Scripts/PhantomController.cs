@@ -10,10 +10,10 @@ public class PhantomController : MonoBehaviour
 {
     public static PhantomController Instance;
 
-    public float walkingSpeed = 90.0f;
+    public float walkingSpeed = 140.0f;
     public Camera playerCamera;
-    public float lookSpeed = 0.03f;
-    public float lookXLimit = 20.0f;
+    public float lookSpeed = 6.0f;
+    public float lookXLimit = 40.0f;
 
     InventoryManager invenManager;
     CharacterController characterController;
@@ -26,10 +26,11 @@ public class PhantomController : MonoBehaviour
     GameObject leg_right;
     GameObject bat;
 
+
     [HideInInspector]
     public bool canMove = true;
     public bool canHit = false;
-
+    public int collectedBody = 0;
 
 
 
@@ -92,6 +93,10 @@ public class PhantomController : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         #endif
 
+        if (canHit && collectedBody == 5)
+        {
+            ProcessCollision(GameObject.Find("Human"));
+        }
     }
 
     void ProcessCollision(GameObject human){
@@ -108,7 +113,8 @@ public class PhantomController : MonoBehaviour
     }
 
     public void ShowBody(Item item)
-    {
+    {   
+        collectedBody += 1;
         switch (item.itemName)
         {
             case "Left Leg":

@@ -9,11 +9,11 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
-   
+    public List<InventoryItemController> InventoryItems;
+
     public Transform ItemContent;
     public GameObject InventoryItem;
 
-    public InventoryItemController InventoryItems;
 
     private void Awake()
     {
@@ -54,12 +54,16 @@ public class InventoryManager : MonoBehaviour
 
     public void SetInventoryItems()
     {
-        InventoryItems = ItemContent.GetComponentInChildren<InventoryItemController>();
-
+        /*
+        Debug.Log("before");
+        InventoryItems = GetComponentInChildren<List<InventoryItemController>>();
+        Debug.Log(Items.Count);
         for (int i=0; i<Items.Count; i++)
         {
-            InventoryItems.AddItem(Items[i]);
-        }
+            InventoryItems[i].AddItem(Items[i]);
+            Debug.Log("here");
+        }*/
+
 
     }
 

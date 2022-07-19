@@ -30,7 +30,6 @@ public class InventoryItemController : MonoBehaviour
 
     public void UseItem()
     {
-        
         switch(item.itemType)
         {
             case Item.ItemType.Flashlight:

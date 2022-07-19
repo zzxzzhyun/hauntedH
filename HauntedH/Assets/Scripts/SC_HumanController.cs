@@ -10,10 +10,10 @@ public class SC_HumanController : MonoBehaviour
 {
     public static SC_HumanController Instance;
 
-    public float walkingSpeed = 90.0f;
+    public float walkingSpeed = 140.0f;
     public Camera playerCamera;
-    public float lookSpeed = 0.03f;
-    public float lookXLimit = 20.0f;
+    public float lookSpeed = 6.0f;
+    public float lookXLimit = 40.0f;
     public int heartRate = 80;
     public int numCorn = 0;
     public int stamina = 100;
@@ -78,7 +78,7 @@ public class SC_HumanController : MonoBehaviour
         // Set animation
         animator.SetFloat("speed", moveDirection.magnitude);
         animator.SetFloat("stamina", stamina);
-
+        IncreaseBPM();
     }
 
 
@@ -86,6 +86,11 @@ public class SC_HumanController : MonoBehaviour
     {
         // calculate distance between human and phantom
         //heartRate += value;
+        float distance = Vector3.Distance(this.transform.position, GameObject.Find("Phantom").transform.position);
+        if (distance < 10)
+        {
+            heartRate +=1;
+        }
         bpmtext.text = $"BPM: {heartRate}";
     }
 
@@ -96,7 +101,6 @@ public class SC_HumanController : MonoBehaviour
         if (seeGhost)
         {
             playerCamera.cullingMask = 1 << LayerMask.NameToLayer("Phantom");
-            playerCamera.cullingMask |= 1 << LayerMask.NameToLayer("Ground");
             playerCamera.cullingMask |= 1 << LayerMask.NameToLayer("Ground");
 
         } else {
@@ -110,6 +114,7 @@ public class SC_HumanController : MonoBehaviour
 
     public void ShowFlashlight()
     {
+        
 
     }
 
