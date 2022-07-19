@@ -8,10 +8,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 {
     public InputField NickNameInput;
     public GameObject DisconnectPanel;
-    public GameObject Canvas;
+    public GameObject HumanCanvas;
+    public GameObject PhantomCanvas;
     public Button connect;
     public Button Phantom;
     public Button Human;
+    public Camera humancam;
+    public Camera phantomcam;
+    public Camera MainCam;
+    public PhotonView PV;
     private bool isHuman;
     private bool isPhantom;
     private void Awake()
@@ -40,8 +45,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Phantom.interactable = false;
         Human.interactable = true;
     }
-    public void Connect() => PhotonNetwork.ConnectUsingSettings();
+    public void Connect() { 
+        MainCam.gameObject.SetActive(false);
+        PhotonNetwork.ConnectUsingSettings();
 
+    }
     public override void OnConnectedToMaster()
     {
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
@@ -49,10 +57,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        
         DisconnectPanel.SetActive(false);
-        Canvas.SetActive(true);
-        if (isPhantom == false && isHuman == true) SpawnHuman();
+        phantomcam.enabled=false;
+        humancam.enabled=false;
+        //Canvas.SetActive(true);
+        if (isPhantom == false && isHuman == true) {
+            SpawnHuman(); 
+            }
         else SpawnPhantom();
     }
     private void Update()
@@ -63,12 +74,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void SpawnHuman()
     {
         GameObject human = PhotonNetwork.Instantiate("HumanPlayer",new Vector3(-95,10,-180),Quaternion.identity);
-        human.GetComponent<PhantomController>().enabled = true;
+        human.GetComponent<SC_HumanController>().enabled = true;
+        HumanCanvas.SetActive(true);
+        humancam.enabled=true;
+        //if (PV.IsMine){human.GetComponentInChildren<Camera>().enabled = true;}
+        
     }
     public void SpawnPhantom()
     {
         GameObject phantom = PhotonNetwork.Instantiate("PhantomPlayer", new Vector3(-100, 50, -180), Quaternion.identity);
-        phantom.GetComponent<SC_HumanController>().enabled = true;
+        phantom.GetComponent<PhantomController>().enabled = true;
+        PhantomCanvas.SetActive(true);
+        phantomcam.enabled=true;
+        //if (PV.IsMine){phantom.GetComponentInChildren<Camera>().enabled = true;}
+
     }
     public override void OnDisconnected(DisconnectCause cause)
     {

@@ -44,7 +44,11 @@ public class SC_HumanController : MonoBehaviour
 
     void Start()
     {
-        playerCamera = GetComponentInChildren<Camera>();
+        if (PV.IsMine)
+        {
+            GameObject.FindGameObjectWithTag("humancam").SetActive(true);
+            playerCamera = GameObject.FindGameObjectWithTag("humancam").GetComponent<Camera>();
+        }
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         invenManager = GetComponentInChildren<InventoryManager>();
@@ -162,13 +166,11 @@ public class SC_HumanController : MonoBehaviour
         {
             stream.SendNext(transform.localPosition);
             stream.SendNext(transform.localRotation);
-            stream.SendNext(playerCamera.transform.rotation);
         }
         else
         {
             moveDirection = (Vector3)stream.ReceiveNext();
             transform.rotation = (Quaternion)stream.ReceiveNext();
-            playerCamera.transform.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 

@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+
 [RequireComponent(typeof(CharacterController))]
 
 public class PhantomController : MonoBehaviour
@@ -53,7 +54,11 @@ public class PhantomController : MonoBehaviour
 
     void Start()
     {
-        playerCamera = GetComponentInChildren<Camera>();
+        if (PV.IsMine)
+        {
+            GameObject.FindGameObjectWithTag("phantomcam").SetActive(true);
+            playerCamera = GameObject.FindGameObjectWithTag("phantomcam").GetComponent<Camera>();
+        }
         characterController = GetComponent<CharacterController>();
         invenManager = GetComponentInChildren<InventoryManager>();
         phantom = GameObject.Find("Phantom");
@@ -148,13 +153,11 @@ public class PhantomController : MonoBehaviour
         {
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
-            stream.SendNext(playerCamera.transform.rotation);
         }
         else
         {
             transform.position = (Vector3)stream.ReceiveNext();
             transform.rotation = (Quaternion)stream.ReceiveNext();
-            playerCamera.transform.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 

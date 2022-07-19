@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Phantom
+  - Human
+  - humancam
+  - phantomcam
   layers:
   - Default
   - TransparentFX
@@ -15,8 +18,8 @@ TagManager:
   - InteractRaycast
   - Ground
   - Phantom
-  - 
-  - 
+  - PhantomItem
+  - HumanItem
   - 
   - 
   - 
