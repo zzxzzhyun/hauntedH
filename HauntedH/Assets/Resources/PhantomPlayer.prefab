@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2681575345064262252}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -90.4, y: 17.8, z: -105.6}
+  m_LocalPosition: {x: -90.4, y: 17.8, z: -145.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2681575345356286435}
   - component: {fileID: 2681575345356286432}
-  - component: {fileID: 2681575345356285981}
+  - component: {fileID: 8842938545126032165}
   - component: {fileID: 433317471632650234}
   - component: {fileID: 8669961822928531077}
   m_Layer: 8
@@ -139,25 +139,24 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2681575345356285981
+--- !u!114 &8842938545126032165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2681575345356286438}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96480d6f05ae04ebba19cd173b485089, type: 3}
+  m_Script: {fileID: 11500000, guid: f952513a148a08f4f84b130cbf655706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkingSpeed: 90
-  playerCamera: {fileID: 2681575345064262254}
-  lookSpeed: 1
-  lookXLimit: 45
-  heartRate: 80
-  bpmtext: {fileID: 0}
+  playerCamera: {fileID: 0}
+  lookSpeed: 0.03
+  lookXLimit: 20
   canMove: 1
+  canHit: 0
 --- !u!114 &433317471632650234
 MonoBehaviour:
   m_ObjectHideFlags: 0

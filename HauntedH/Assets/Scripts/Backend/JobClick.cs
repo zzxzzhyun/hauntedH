@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class JobClick : MonoBehaviour
 {
-    [SerializeField] Button phantom;
-    [SerializeField] Button human;
-    // Start is called before the first frame update
-    public void Phantom()
+    public GameObject humanorphantom;
+    public Button human;
+    public Button phantom;
+    public void ClickBtn()
     {
-        phantom.interactable = false;
-        human.interactable = true;
-        GameMgr.isPlayer = true;
-        GameMgr.isPhantom = false;
-    }
-    public void Human()
-    {
-        phantom.interactable = true;
-        human.interactable = false;
-        GameMgr.isPlayer = false;
-        GameMgr.isPhantom = true;
+        GameObject humanorphantom = EventSystem.current.currentSelectedGameObject;
+        if(humanorphantom.name == "Phantom")
+        {
+            phantom.GetComponent<Button>().interactable = false;
+            human.GetComponent<Button>().interactable = true;
+        }
+        else
+        {
+            phantom.GetComponent<Button>().interactable = true;
+            human.GetComponent<Button>().interactable = false;
+        }
+        DontDestroyOnLoad(humanorphantom);
     }
     
 }
